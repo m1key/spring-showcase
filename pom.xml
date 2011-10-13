@@ -7,4 +7,27 @@
 	<packaging>war</packaging>
 	<name>Spring Showcase</name>
 	<description>Showcase of the Spring Framework.</description>
+	<properties>
+		<spring.version>3.0.6.RELEASE</spring.version>
+	</properties>
+	<build>
+		<finalName>spring-showcase</finalName>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	</dependencies>
 </project>
