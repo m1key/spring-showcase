@@ -8,7 +8,7 @@
 
 	<div id="container">
 		<h1>Spring Showcase - About</h1>
-
+		<p>${welcomeMessage}</p>
 	</div>
 
 </body>

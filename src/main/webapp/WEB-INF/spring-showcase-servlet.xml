@@ -13,4 +13,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<bean class="me.m1key.springshowcase.services.DefaultTrivialService" />
+
 </beans>
