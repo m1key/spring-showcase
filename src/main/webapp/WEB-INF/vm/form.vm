@@ -1,9 +1,8 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Spring Showcase - About</title>
+<title>Spring Showcase - Form VM</title>
 <style>
 .error {
 	color: #ff0000;
@@ -14,20 +13,20 @@
 <body>
 
 	<div id="container">
-		<form:form method="post" modelAttribute="reservation">
+		<form method="post" action="">
 			<table>
 				<tr>
 					<td>Your name:</td>
-					<td><form:input path="userName" />
+					<td>#springFormInput("reservation.userName" "")
 					</td>
-					<td><form:errors path="userName" cssClass="error" />
+					<td>#springShowErrors("" "")
 					</td>
 				</tr>
 				<tr>
 					<td>Your age:</td>
-					<td><form:input path="age" />
+					<td>#springFormInput("reservation.age" "")
 					</td>
-					<td><form:errors path="age" cssClass="error" />
+					<td>#springShowErrors("" "")
 					</td>
 				</tr>
 				<tr>

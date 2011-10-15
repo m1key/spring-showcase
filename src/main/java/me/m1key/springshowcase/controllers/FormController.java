@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -31,9 +32,11 @@ public class FormController {
 			.getLogger(FormController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String setupForm(Model model) {
+	public String setupForm(Model model,
+			@RequestParam(required = false) String userName) {
 		log.debug("Setting up form.");
 		Reservation reservation = new Reservation();
+		reservation.setUserName(userName);
 		model.addAttribute(RESERVATION, reservation);
 		return RESERVATION_FORM;
 	}
