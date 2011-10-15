@@ -1,18 +1,13 @@
 package me.m1key.springshowcase.controllers;
 
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
+import javax.validation.Valid;
 
 import me.m1key.springshowcase.domain.Reservation;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,12 +25,6 @@ public class FormController {
 	private static final String RESERVATION_FORM = "form";
 	private static final String RESERVATION = "reservation";
 
-	private static Validator validator;
-
-	public FormController() {
-		validator = Validation.buildDefaultValidatorFactory().getValidator();
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(Model model) {
 		Reservation reservation = new Reservation();
@@ -45,18 +34,8 @@ public class FormController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String submitForm(Model model,
-			@ModelAttribute(RESERVATION) Reservation reservation,
+			@ModelAttribute(RESERVATION) @Valid Reservation reservation,
 			BindingResult result) {
-		Set<ConstraintViolation<Reservation>> violations = validator
-				.validate(reservation);
-		for (ConstraintViolation<Reservation> violation : violations) {
-			String propertyPath = violation.getPropertyPath().toString();
-			String message = violation.getMessage();
-
-			result.addError(new FieldError("member", propertyPath, "Invalid "
-					+ propertyPath + "(" + message + ")"));
-		}
-
 		if (result.hasErrors()) {
 			model.addAttribute(RESERVATION, reservation);
 			return RESERVATION_FORM;
