@@ -29,5 +29,12 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>7.0.21</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

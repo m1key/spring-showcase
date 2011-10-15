@@ -23,6 +23,11 @@
 					<td><form:errors path="userName" cssClass="error" /></td>
 				</tr>
 				<tr>
+					<td>Your age:</td>
+					<td><form:input path="userName" /></td>
+					<td><form:errors path="userName" cssClass="error" /></td>
+				</tr>
+				<tr>
 					<td colspan="3"><input type="submit" /></td>
 				</tr>
 			</table>

@@ -1,5 +1,7 @@
 package me.m1key.springshowcase.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import me.m1key.springshowcase.domain.Reservation;
 import me.m1key.springshowcase.validators.ReservationValidator;
 
@@ -31,20 +33,35 @@ public class FormController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String submitForm(Model model,
 			@ModelAttribute("reservation") Reservation reservation,
-			BindingResult result, SessionStatus status) {
+			BindingResult result) {
 		validator.validate(reservation, result);
 		if (result.hasErrors()) {
 			model.addAttribute("reservation", reservation);
 			return "form";
 		} else {
-			status.setComplete();
+			reservation.setComplete(true);
 			return "redirect:form/success";
 		}
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/success")
-	public String displaySuccess() {
-		return "success";
+	public String displaySuccess(Model model, HttpSession session,
+			SessionStatus status) {
+		if (reservationHasBeenCompleted(session)) {
+			model.addAttribute(getReservationFromSession(session));
+			status.setComplete();
+			return "success";
+		} else {
+			return "redirect:../form";
+		}
 	}
 
+	private boolean reservationHasBeenCompleted(HttpSession session) {
+		Reservation reservation = getReservationFromSession(session);
+		return reservation != null && reservation.isComplete();
+	}
+
+	private Reservation getReservationFromSession(HttpSession session) {
+		return (Reservation) session.getAttribute("reservation");
+	}
 }
