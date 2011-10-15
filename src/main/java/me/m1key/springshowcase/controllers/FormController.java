@@ -20,27 +20,37 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes("reservation")
 public class FormController {
 
+	private static final String REDIRECT_TO_FORM = "redirect:../form";
+
+	private static final String SUCCESS_PAGE = "success";
+
+	private static final String REDIRECT_TO_SUCCESS = "redirect:form/success";
+
+	private static final String RESERVATION_FORM = "form";
+
+	private static final String RESERVATION = "reservation";
+
 	@Autowired
 	private ReservationValidator validator;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(Model model) {
 		Reservation reservation = new Reservation();
-		model.addAttribute("reservation", reservation);
-		return "form";
+		model.addAttribute(RESERVATION, reservation);
+		return RESERVATION_FORM;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String submitForm(Model model,
-			@ModelAttribute("reservation") Reservation reservation,
+			@ModelAttribute(RESERVATION) Reservation reservation,
 			BindingResult result) {
 		validator.validate(reservation, result);
 		if (result.hasErrors()) {
-			model.addAttribute("reservation", reservation);
-			return "form";
+			model.addAttribute(RESERVATION, reservation);
+			return RESERVATION_FORM;
 		} else {
 			reservation.setComplete(true);
-			return "redirect:form/success";
+			return REDIRECT_TO_SUCCESS;
 		}
 	}
 
@@ -50,9 +60,9 @@ public class FormController {
 		if (reservationHasBeenCompleted(session)) {
 			model.addAttribute(getReservationFromSession(session));
 			status.setComplete();
-			return "success";
+			return SUCCESS_PAGE;
 		} else {
-			return "redirect:../form";
+			return REDIRECT_TO_FORM;
 		}
 	}
 
@@ -62,6 +72,6 @@ public class FormController {
 	}
 
 	private Reservation getReservationFromSession(HttpSession session) {
-		return (Reservation) session.getAttribute("reservation");
+		return (Reservation) session.getAttribute(RESERVATION);
 	}
 }
