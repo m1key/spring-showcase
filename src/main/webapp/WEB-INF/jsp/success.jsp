@@ -2,20 +2,12 @@
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Spring Showcase</title>
+<title>Spring Showcase - Success!</title>
 </head>
 <body>
 
 	<div id="container">
-		<h1>Spring Showcase</h1>
-		
-		<p>
-			<a href="app/about">About</a>
-		</p>
-		<p>
-			<a href="app/form">Sample Form</a>
-		</p>
-
+		<h1>Spring Showcase - Success!</h1>
 	</div>
 
 </body>
