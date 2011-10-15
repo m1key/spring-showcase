@@ -15,20 +15,24 @@
 
 	<div id="container">
 		<form:form method="post" modelAttribute="reservation">
-			<form:errors path="*" cssClass="error" />
 			<table>
 				<tr>
 					<td>Your name:</td>
-					<td><form:input path="userName" /></td>
-					<td><form:errors path="userName" cssClass="error" /></td>
+					<td><form:input path="userName" />
+					</td>
+					<td><form:errors path="userName" cssClass="error" />
+					</td>
 				</tr>
 				<tr>
 					<td>Your age:</td>
-					<td><form:input path="userName" /></td>
-					<td><form:errors path="userName" cssClass="error" /></td>
+					<td><form:input path="age" />
+					</td>
+					<td><form:errors path="age" cssClass="error" />
+					</td>
 				</tr>
 				<tr>
-					<td colspan="3"><input type="submit" /></td>
+					<td colspan="3"><input type="submit" />
+					</td>
 				</tr>
 			</table>
 		</form:form>
