@@ -36,34 +36,18 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		</property>
 	</bean>
 
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="order" value="0" />
+		<property name="location" value="/WEB-INF/views.xml" />
+	</bean>
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="order" value="1" />
 		<property name="cache" value="true" />
 		<property name="prefix" value="/WEB-INF/vm/" />
 		<property name="suffix" value=".vm" />
 		<property name="exposeSpringMacroHelpers" value="true" />
-	</bean>
-
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="mediaTypes">
-			<map>
-				<entry key="json" value="application/json" />
-			</map>
-		</property>
-		<property name="defaultViews">
-			<list>
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-			</list>
-		</property>
-		<property name="defaultContentType" ref="jsonMediaType" />
-		<property name="ignoreAcceptHeader" value="false" />
-	</bean>
-
-	<bean id="jsonMediaType" class="org.springframework.http.MediaType">
-		<constructor-arg value="application" />
-		<constructor-arg value="json" />
 	</bean>
 
 </beans>
