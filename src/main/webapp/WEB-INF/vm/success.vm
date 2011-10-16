@@ -8,6 +8,9 @@
 
 	<div id="container">
 		<h1>Spring Showcase - Success!</h1>
+		<p>
+			${reservation.userName}, ${reservation.age}
+		</p>
 	</div>
 
 </body>
