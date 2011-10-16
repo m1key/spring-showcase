@@ -3,18 +3,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Spring Showcase</title>
+<link type="text/css" href="css/humanity/jquery-ui-1.8.16.custom.css"
+	rel="stylesheet" />
+<link type="text/css" href="css/basic.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script>
+	$(function() {
+		$("#accordion").accordion();
+	});
+	$(function() {
+		$( "input:submit, a, button", ".buttoniseUs" ).button();
+	});
+</script>
 </head>
 <body>
 
 	<div id="container">
 		<h1>Spring Showcase</h1>
-		
-		<p>
-			<a href="app/about">About</a>
-		</p>
-		<p>
-			<a href="app/form">Sample Form</a>
-		</p>
+
+
+		<div id="accordion">
+			<h3>
+				<a href="#">Information</a>
+			</h3>
+			<div>
+				<p class="buttoniseUs">
+					<a href="app/about">About</a>
+				</p>
+			</div>
+			<h3>
+				<a href="#">Forms</a>
+			</h3>
+			<div>
+				<p class="buttoniseUs">
+					<a href="app/form">Sample Form</a>
+				</p>
+			</div>
+		</div>
 
 	</div>
 

@@ -3,6 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Spring Showcase - Success!</title>
+<link type="text/css" href="../css/humanity/jquery-ui-1.8.16.custom.css"
+	rel="stylesheet" />
+<link type="text/css" href="../css/basic.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.8.16.custom.min.js"></script>
 </head>
 <body>
 
