@@ -49,23 +49,16 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		<property name="mediaTypes">
 			<map>
 				<entry key="json" value="application/json" />
-				<entry key="xml" value="application/xml" />
 			</map>
 		</property>
 		<property name="defaultViews">
 			<list>
 				<bean
 					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-					<constructor-arg>
-						<bean class="org.springframework.oxm.xstream.XStreamMarshaller"
-							p:autodetectAnnotations="false" />
-					</constructor-arg>
-				</bean>
 			</list>
 		</property>
 		<property name="defaultContentType" ref="jsonMediaType" />
-		<property name="ignoreAcceptHeader" value="true" />
+		<property name="ignoreAcceptHeader" value="false" />
 	</bean>
 
 	<bean id="jsonMediaType" class="org.springframework.http.MediaType">
