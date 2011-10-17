@@ -14,6 +14,10 @@
 	});
 </script>
 <style>
+	.ui-autocomplete-loading { background: white url('../images/ui-anim_basic_16x16.gif') right center no-repeat; }
+</style>
+<script type="text/javascript" src="../js/autocomplete.js"></script>
+<style>
 .error {
 	color: #ff0000;
 	font-weight: bold;
