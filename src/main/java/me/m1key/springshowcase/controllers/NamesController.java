@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/names")
@@ -19,8 +20,9 @@ public class NamesController {
 			.getLogger(NamesController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getNames(Model model) {
-		log.debug("getNames()");
+	public String getNames(Model model,
+			@RequestParam(required = false) String term) {
+		log.debug("getNames(\"{}\")", term);
 		model.addAttribute("names", Arrays.asList(names));
 		return "jsonNames";
 	}
