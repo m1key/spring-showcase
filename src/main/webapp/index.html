@@ -13,7 +13,12 @@
 		$("#accordion").accordion();
 	});
 	$(function() {
-		$( "input:submit, a, button", ".buttoniseUs" ).button();
+		$("input:submit, a, button", ".buttoniseUs").button();
+	});
+	$(function() {
+		$.getJSON('app/date', {}, function(json) {
+			$("#currentDate").html(json.currentDate);
+		});
 	});
 </script>
 </head>
@@ -28,6 +33,9 @@
 				<a href="#">Information</a>
 			</h3>
 			<div>
+				<p>
+					This information comes via AJAX: <span id="currentDate"></span>
+				</p>
 				<p class="buttoniseUs">
 					<a href="app/about">About</a>
 				</p>

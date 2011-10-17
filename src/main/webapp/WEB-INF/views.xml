@@ -11,5 +11,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<bean name="jsonNames"
 		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+	<bean name="date"
+		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
 </beans>
