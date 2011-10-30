@@ -10,7 +10,9 @@
 <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 <script>
 	$(function() {
-		$("#accordion").accordion();
+		$("#accordion").accordion({
+			autoHeight : false
+		});
 	});
 	$(function() {
 		$("input:submit, a, button", ".buttoniseUs").button();
@@ -46,6 +48,9 @@
 			<div>
 				<p class="buttoniseUs">
 					<a href="app/form">Sample Form</a>
+				</p>
+				<p class="buttoniseUs">
+					<a href="app/personRegistration">Sample Wizard Form</a>
 				</p>
 			</div>
 		</div>
