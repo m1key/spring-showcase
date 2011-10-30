@@ -1,12 +1,14 @@
 package me.m1key.springshowcase.controllers;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import me.m1key.springshowcase.editors.GenderEditor;
 import me.m1key.springshowcase.to.Gender;
 import me.m1key.springshowcase.to.PersonTo;
 import me.m1key.springshowcase.validators.PersonRegistrationValidator;
@@ -17,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,6 +51,11 @@ public class PersonRegistrationController {
 	public PersonRegistrationController(PersonRegistrationValidator validator) {
 		super();
 		this.validator = validator;
+	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Gender.class, new GenderEditor());
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -106,11 +115,12 @@ public class PersonRegistrationController {
 	}
 
 	@ModelAttribute("genders")
-	public Map<Gender, String> getGenders() {
-		Map<Gender, String> genders = new HashMap<Gender, String>();
-		genders.put(Gender.MALE, "Male");
-		genders.put(Gender.FEMALE, "Female");
-		genders.put(Gender.OTHER, "Other");
+	public Map<String, String> getGenders() {
+		Map<String, String> genders = new LinkedHashMap<String, String>();
+		genders.put("", "-- pick one --");
+		genders.put("m", "Male");
+		genders.put("f", "Female");
+		genders.put("o", "Other");
 		return genders;
 	}
 
