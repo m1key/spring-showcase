@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Spring Showcase - Person Registration 1/3</title>
+<link type="text/css" href="../css/humanity/jquery-ui-1.8.16.custom.css"
+	rel="stylesheet" />
+<link type="text/css" href="../css/basic.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.8.16.custom.min.js"></script>
+<script>
+	$(function() {
+		$( "input:submit" ).button();
+	});
+</script>
+<style>
+.error {
+	color: #ff0000;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+	<div id="container">
+		<form method="post" modelAttribute="personTo">
+			<table>
+				<tr>
+					<td>Your name:</td>
+					<td>#springFormInput("personTo.name" "")
+					</td>
+					<td>#springShowErrors("" "")
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input type="submit" value="Next" name="_target1">
+						<input type="submit" value="Cancel" name="_cancel">
+						<input type="hidden" value="0" name="_page">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+</html>
