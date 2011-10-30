@@ -9,9 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import me.m1key.springshowcase.to.Gender;
 import me.m1key.springshowcase.to.PersonTo;
+import me.m1key.springshowcase.validators.PersonRegistrationValidator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,20 +30,24 @@ import org.springframework.web.util.WebUtils;
 @SessionAttributes("personTo")
 public class PersonRegistrationController {
 
+	private static final String REDIRECT_TO_FORM = "redirect:../personRegistration";
+	private static final String SUCCESS_PAGE = "registrationSuccess";
+	private static final String PERSON_TO = "personTo";
 	private static final String REDIRECT_TO_SUCCESS_PAGE = "redirect:personRegistration/registrationSuccess";
-
 	private static final String REGISTRATION_GENDER_FORM = "registrationGenderForm";
-
 	private static final String REGISTRATION_NAME_FORM = "registrationNameForm";
-
 	private static final String REDIRECT_TO_HOMEPAGE = "redirect:/";
+
+	private PersonRegistrationValidator validator;
 
 	private Logger log = LoggerFactory
 			.getLogger(PersonRegistrationController.class);
 
-	private static final String REDIRECT_TO_FORM = "redirect:../personRegistration";
-	private static final String SUCCESS_PAGE = "registrationSuccess";
-	private static final String PERSON_TO = "personTo";
+	@Autowired
+	public PersonRegistrationController(PersonRegistrationValidator validator) {
+		super();
+		this.validator = validator;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(Model model) {
@@ -65,18 +71,38 @@ public class PersonRegistrationController {
 			status.setComplete();
 			return REDIRECT_TO_HOMEPAGE;
 		} else if (userIsFinished(request)) {
-			log.info("Registration finished for person [{}: {}].",
-					personTo.getGender(), personTo.getName());
-			personTo.setRegistrationComplete(true);
-			return REDIRECT_TO_SUCCESS_PAGE;
+			validator.validate(personTo, result);
+			if (result.hasErrors()) {
+				return pageForms.get(currentPage);
+			} else {
+				log.info("Registration finished for person [{}: {}].",
+						personTo.getGender(), personTo.getName());
+				personTo.setRegistrationComplete(true);
+				return REDIRECT_TO_SUCCESS_PAGE;
+			}
 		} else {
 			int targetPage = WebUtils.getTargetPage(request, "_target",
 					currentPage);
-			if (targetPage < currentPage) {
+			if (userClickedPrevious(currentPage, targetPage)) {
+				return pageForms.get(targetPage);
+			} else {
+				switch (currentPage) {
+				case 0:
+					validator.validateName(personTo, result);
+					break;
+				}
 
+				if (result.hasErrors()) {
+					return pageForms.get(currentPage);
+				} else {
+					return pageForms.get(targetPage);
+				}
 			}
-			return pageForms.get(targetPage);
 		}
+	}
+
+	private boolean userClickedPrevious(int currentPage, int targetPage) {
+		return targetPage < currentPage;
 	}
 
 	@ModelAttribute("genders")
