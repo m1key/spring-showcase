@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import me.m1key.springshowcase.to.Gender;
 import me.m1key.springshowcase.to.PersonTo;
 
 import org.slf4j.Logger;
@@ -64,7 +65,8 @@ public class PersonRegistrationController {
 			status.setComplete();
 			return REDIRECT_TO_HOMEPAGE;
 		} else if (userIsFinished(request)) {
-			log.info("Registration finished for [{}].", personTo.getName());
+			log.info("Registration finished for person [{}: {}].",
+					personTo.getGender(), personTo.getName());
 			personTo.setRegistrationComplete(true);
 			return REDIRECT_TO_SUCCESS_PAGE;
 		} else {
@@ -75,6 +77,15 @@ public class PersonRegistrationController {
 			}
 			return pageForms.get(targetPage);
 		}
+	}
+
+	@ModelAttribute("genders")
+	public Map<Gender, String> getGenders() {
+		Map<Gender, String> genders = new HashMap<Gender, String>();
+		genders.put(Gender.MALE, "Male");
+		genders.put(Gender.FEMALE, "Female");
+		genders.put(Gender.OTHER, "Other");
+		return genders;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/registrationSuccess")

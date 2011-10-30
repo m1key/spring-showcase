@@ -3,7 +3,7 @@ package me.m1key.springshowcase.to;
 public class PersonTo {
 
 	private String name;
-	private String gender;
+	private Gender gender;
 
 	private boolean registrationComplete;
 
@@ -15,11 +15,11 @@ public class PersonTo {
 		this.name = name;
 	}
 
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 

@@ -27,7 +27,7 @@
 			<table>
 				<tr>
 					<td>Your gender:</td>
-					<td>#springFormInput("personTo.gender" "")
+					<td>#springFormSingleSelect("personTo.gender" $genders "")
 					</td>
 					<td>#springShowErrors("" "")
 					</td>
