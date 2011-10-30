@@ -9,12 +9,20 @@ import org.apache.commons.lang.StringUtils;
 public class GenderEditor extends PropertyEditorSupport {
 
 	@Override
+	public String getAsText() {
+		if (getValue() == null) {
+			return null;
+		} else {
+			Gender gender = (Gender) getValue();
+			return gender.toString();
+		}
+	}
+
+	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
 		if (StringUtils.isEmpty(text)) {
-			return;
-		}
-
-		if (text.equalsIgnoreCase("m")) {
+			setValue("");
+		} else if (text.equalsIgnoreCase("m")) {
 			setValue(Gender.MALE);
 		} else if (text.equalsIgnoreCase("f")) {
 			setValue(Gender.FEMALE);

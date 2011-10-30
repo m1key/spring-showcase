@@ -16,10 +16,15 @@ public class PersonRegistrationValidator implements Validator {
 
 	public void validate(Object target, Errors errors) {
 		validateName(target, errors);
+		validateGender(target, errors);
 	}
 
 	public void validateName(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmpty(errors, "name", "required.name");
+	}
+
+	private void validateGender(Object target, Errors errors) {
+		ValidationUtils.rejectIfEmpty(errors, "gender", "required.gender");
 	}
 
 }
